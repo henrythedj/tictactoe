@@ -24,7 +24,6 @@ class Game
 		@won = 0
 		@wins = [[0,1,2],[0,3,6],[0,4,8],[1,4,7],[2,5,8],[2,4,6],[3,4,5],[6,7,8]]
 		@example_array = []
-		@game_won = 0
 		9.times do |i| @example_array.push (i+1).to_s end
 		9.times do @array.push "-" end
 		puts "#{@player1.name} will go first and play as 'X'. #{@player2.name} will move second and play as 'O'. Good luck, losers..."
@@ -69,7 +68,6 @@ class Game
 		self.board_status
 		puts "#{player.name} wins and has won #{player.wins} game(s)"
 		@won = 1
-		@game_won = 1
 	end
 
 	def board_status
@@ -81,7 +79,7 @@ class Game
 	end
 
 	protected :win, :check_win
-	attr_accessor :player1, :player2, :example_array, :game_won, :won, :wins
+	attr_accessor :player1, :player2, :example_array, :won, :wins
 end
 
 def roboto_move(current_game,example,move)
@@ -136,7 +134,7 @@ while keep_playing == "y"
 	while in_game == "y"
 		current_game = Game.new(players[select_player1], players[select_player2])
 		i = 1
-		while i <= 9 && current_game.game_won == 0
+		while i <= 9 && current_game.won == 0
 			puts "It is #{current_game.player1.name}'s turn." if i%2 != 0
 			puts "It is #{current_game.player2.name}'s turn." if i%2 == 0
 			current_game.board_status
